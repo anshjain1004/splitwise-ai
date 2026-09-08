@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SplitWise AI — Bill Splitter</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">₹</span><div><b>SplitWise AI</b><small>Photograph → Fair Bill</small></div></div>
+  <div class="pill">AI Developer Challenge</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">SMART BILL SPLITTER</p>
+      <h1>Stop arguing over the bill.</h1>
+      <p>Upload a restaurant bill, review what AI read, assign who ate what, and get a mathematically fair split.</p>
+    </div>
+  </section>
+
+  <div class="steps">
+    <div class="step active" data-step="1"><span>1</span> Upload</div>
+    <div class="line"></div>
+    <div class="step" data-step="2"><span>2</span> Review</div>
+    <div class="line"></div>
+    <div class="step" data-step="3"><span>3</span> Assign</div>
+    <div class="line"></div>
+    <div class="step" data-step="4"><span>4</span> Results</div>
+  </div>
+
+  <section id="uploadPanel" class="panel">
+    <div class="panel-head">
+      <div><h2>Upload bill</h2><p>One photo for a normal receipt, two for a long bill.</p></div>
+    </div>
+    <label class="dropzone" id="dropzone">
+      <input id="files" type="file" accept="image/*" multiple>
+      <div class="upload-icon">↑</div>
+      <strong>Drop bill photos here</strong>
+      <span>or click to browse · maximum 2 images</span>
+    </label>
+    <div id="previews" class="previews"></div>
+    <button id="extractBtn" class="primary" disabled>Extract bill with AI →</button>
+    <p id="uploadStatus" class="status"></p>
+  </section>
+
+  <section id="reviewPanel" class="panel hidden">
+    <div class="panel-head">
+      <div><h2>Review extracted bill</h2><p>Fix anything the model misread before any arithmetic happens.</p></div>
+      <div id="confidenceBadge" class="confidence"></div>
+    </div>
+    <div id="billMeta" class="meta-grid"></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Item</th><th>Qty</th><th>Unit price</th><th>Total</th><th>Confidence</th><th></th></tr></thead>
+        <tbody id="itemsBody"></tbody>
+      </table>
+    </div>
+    <button id="addItem" class="ghost">+ Add item</button>
+    <div class="charges" id="charges"></div>
+    <div class="review-actions">
+      <button class="ghost" id="backUpload">← Back</button>
+      <button class="primary" id="toAssign">Looks good — assign items →</button>
+    </div>
+  </section>
+
+  <section id="assignPanel" class="panel hidden">
+    <div class="panel-head">
+      <div><h2>Who ate what?</h2><p>Use portions: 1 + 1 means a 50/50 split; 2 + 1 means 2/3 vs 1/3.</p></div>
+    </div>
+    <div class="member-row">
+      <input id="memberName" placeholder="Member name">
+      <button class="ghost" id="addMember">+ Add member</button>
+      <div id="members"></div>
+    </div>
+    <div id="assignmentList"></div>
+    <div class="review-actions">
+      <button class="ghost" id="backReview">← Review</button>
+      <button class="primary" id="calculate">Calculate fair split →</button>
+    </div>
+    <p id="assignStatus" class="status"></p>
+  </section>
+
+  <section id="resultPanel" class="panel hidden">
+    <div class="result-header">
+      <div><p class="eyebrow">FINAL BREAKDOWN</p><h2>Everyone pays their fair share.</h2></div>
+      <div id="matchBadge"></div>
+    </div>
+    <div id="warning"></div>
+    <div id="results"></div>
+    <div class="summary-strip" id="summary"></div>
+    <button class="ghost" id="startOver">↻ Split another bill</button>
+  </section>
+</main>
+
+<footer>Built for the ITGeeks AI Developer · deterministic math + multimodal extraction</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
