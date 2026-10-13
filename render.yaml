@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: splitwise-ai
+    runtime: python
+    plan: free
+    branch: main
+    autoDeploy: true
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.6
+      # Set GEMINI_API_KEY in the Render dashboard (it is a secret, so it is
+      # not committed here). Leave it empty and set DEMO_MODE=true for a demo.
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.8-flash
+      - key: GEMINI_FALLBACK_MODELS
+        value: gemini-3.6-flash,gemini-3.5-flash
+      - key: DEMO_MODE
+        value: "false"
